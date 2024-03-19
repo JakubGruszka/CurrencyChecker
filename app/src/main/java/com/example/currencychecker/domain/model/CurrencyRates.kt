@@ -3,7 +3,7 @@ package com.example.currencychecker.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Currencies(
+data class CurrencyRates(
     @SerializedName("amount")
     val amount: Int,
     @SerializedName("base")

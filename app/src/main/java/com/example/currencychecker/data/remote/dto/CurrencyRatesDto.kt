@@ -1,10 +1,10 @@
 package com.example.currencychecker.data.remote.dto
 
 
-import com.example.currencychecker.domain.model.Currencies
+import com.example.currencychecker.domain.model.CurrencyRates
 import com.google.gson.annotations.SerializedName
 
-data class CurrenciesDto(
+data class CurrencyRatesDto(
     @SerializedName("amount")
     val amount: Int,
     @SerializedName("base")
@@ -15,7 +15,7 @@ data class CurrenciesDto(
     val rates: Map<String, Double>
 )
 
-fun CurrenciesDto.toCurrencies() = Currencies (
+fun CurrencyRatesDto.toCurrencies() = CurrencyRates (
     amount = amount,
     base = base,
     rates = rates

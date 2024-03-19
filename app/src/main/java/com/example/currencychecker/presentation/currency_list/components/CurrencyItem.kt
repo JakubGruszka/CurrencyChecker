@@ -13,7 +13,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.currencychecker.ui.theme.CurrencyCheckerTheme
 
 @Composable
 fun CurrencyItem(
@@ -28,16 +30,22 @@ fun CurrencyItem(
     ) {
         Text(
             text = key,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyLarge,
             overflow = TextOverflow.Ellipsis
         )
         Text(
             text = value.toString(),
-            color = Color.Green,
-            fontStyle = FontStyle.Italic,
             textAlign = TextAlign.End,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.align(CenterVertically)
         )
+    }
+}
+
+@Preview
+@Composable
+fun CurrencyItemPreview() {
+    CurrencyCheckerTheme {
+        CurrencyItem(key = "USD", value = 11.234)
     }
 }
