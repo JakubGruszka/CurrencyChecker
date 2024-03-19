@@ -1,4 +1,4 @@
-package com.example.currencychecker.domain.use_case.get_currency_rates
+package com.example.currencychecker.domain.use_case.get_currencies
 
 import com.example.currencychecker.common.Resource
 import com.example.currencychecker.data.remote.dto.toCurrencies
@@ -10,20 +10,19 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetCurrencyRatesUseCase @Inject constructor(
+class GetCurrenciesUseCase @Inject constructor(
     private val repository: CurrencyRepository
 ) {
 
-    operator fun invoke(): Flow<Resource<CurrencyRates>> = flow {
+    operator fun invoke(): Flow<Resource<Map<String, String>>> = flow {
         try {
-            emit(Resource.Loading<CurrencyRates>())
+            emit(Resource.Loading<Map<String, String>>())
             val currencies = repository.getCurrencies()
-            val currencyRates = repository.getCurrencyRates().toCurrencies(currencies)
-            emit(Resource.Success(currencyRates))
+            emit(Resource.Success(currencies))
         } catch (e: HttpException) {
-            emit(Resource.Error<CurrencyRates>(e.message()))
+            emit(Resource.Error<Map<String, String>>(e.message()))
         } catch (e: IOException) {
-            emit(Resource.Error<CurrencyRates>("Can't reach server"))
+            emit(Resource.Error<Map<String, String>>("Can't reach server"))
         }
     }
 }

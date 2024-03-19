@@ -15,8 +15,8 @@ data class CurrencyRatesDto(
     val rates: Map<String, Double>
 )
 
-fun CurrencyRatesDto.toCurrencies() = CurrencyRates (
+fun CurrencyRatesDto.toCurrencies(names: Map<String, String>) = CurrencyRates (
     amount = amount,
     base = base,
-    rates = rates
+    rates = rates.map { CurrencyRates.Rate(names[it.key] ?: "Unknown", it.key, it.value) }
 )

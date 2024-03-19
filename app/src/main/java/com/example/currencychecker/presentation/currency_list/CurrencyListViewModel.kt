@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.currencychecker.common.Resource
+import com.example.currencychecker.domain.use_case.get_currencies.GetCurrenciesUseCase
 import com.example.currencychecker.domain.use_case.get_currency_rates.GetCurrencyRatesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -24,10 +25,15 @@ class CurrencyListViewModel @Inject constructor(
     }
 
     private fun getCurrencies() {
-        getCurrencyRatesUseCase().onEach { response ->
+        getCurrencyRatesUseCase()
+            .onEach { response ->
             when (response) {
                 is Resource.Success -> {
-                    _state.value = CurrencyListState(currencies = response.data?.rates ?: emptyMap())
+                    _state.value = CurrencyListState(
+                        currencies = response.data?.rates ?: emptyList(),
+                        referenceCurrency = response.data?.base ?: "",
+                        referenceAmount = response.data?.amount ?: 0
+                    )
                 }
                 is Resource.Error -> {
                     _state.value = CurrencyListState(error = response.message ?: "Unexpected error")

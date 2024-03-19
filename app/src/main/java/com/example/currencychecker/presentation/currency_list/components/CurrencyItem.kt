@@ -9,18 +9,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.currencychecker.domain.model.CurrencyRates
 import com.example.currencychecker.ui.theme.CurrencyCheckerTheme
 
 @Composable
 fun CurrencyItem(
-    key: String,
-    value: Double
+    currencyRate: CurrencyRates.Rate
 ) {
     Row(
         modifier = Modifier
@@ -29,12 +27,12 @@ fun CurrencyItem(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = key,
+            text = "${currencyRate.symbol} - ${currencyRate.name}",
             style = MaterialTheme.typography.bodyLarge,
             overflow = TextOverflow.Ellipsis
         )
         Text(
-            text = value.toString(),
+            text = currencyRate.rate.toString(),
             textAlign = TextAlign.End,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.align(CenterVertically)
@@ -46,6 +44,12 @@ fun CurrencyItem(
 @Composable
 fun CurrencyItemPreview() {
     CurrencyCheckerTheme {
-        CurrencyItem(key = "USD", value = 11.234)
+        CurrencyItem(
+            CurrencyRates.Rate(
+                name = "United State Dollar",
+                symbol = "USD",
+                rate = 1.23
+            )
+        )
     }
 }
