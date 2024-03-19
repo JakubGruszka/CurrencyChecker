@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Pixels Gallery"
+rootProject.name = "Currency Checker"
 include(":app")
  

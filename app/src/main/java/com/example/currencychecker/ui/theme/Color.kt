@@ -1,4 +1,4 @@
-package com.example.pixelsgallery.ui.theme
+package com.example.currencychecker.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

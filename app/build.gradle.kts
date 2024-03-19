@@ -1,14 +1,16 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlinKapt)
 }
 
 android {
-    namespace = "com.example.pixelsgallery"
+    namespace = "com.example.currencychecker"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.pixelsgallery"
+        applicationId = "com.example.currencychecker"
         minSdk = 33
         targetSdk = 34
         versionCode = 1
@@ -66,4 +68,30 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Retrofit
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.retrofit2.gson)
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.okhttp3.logging)
+
+    //Dagger - Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Coroutine Lifecycle Scopes
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+
+
+}
+
+kapt {
+    correctErrorTypes = true
 }

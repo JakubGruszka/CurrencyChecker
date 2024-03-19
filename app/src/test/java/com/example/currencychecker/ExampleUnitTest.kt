@@ -1,4 +1,4 @@
-package com.example.pixelsgallery
+package com.example.currencychecker
 
 import org.junit.Test
 
